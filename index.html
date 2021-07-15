@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Freenly</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container-body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #f0f0f0;
+      display: grid;
+      place-items: center;
+    }
+    .body {
+        color: #434043;
+        text-align: center;
+    }
+    h1 {
+      font-size: 2.6rem;
+        font-weight: 900;
+        margin-bottom: 4rem;
+    }
+    input {
+      border: none;
+      background-color: #fff;
+      padding: 1rem;
+      font-size: 2rem;
+      text-align: center;
+      letter-spacing: 3px;
+      outline: none;
+    }
+    button {
+      background-color: #434043;
+      border: none;
+      color: #fff;
+      padding: 1rem;
+      font-size: 2rem;
+      text-align: center;
+      outline: none;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+  </style>
+  <body>
+    <div class="container-body">
+      <div class="body">
+        <h1>Preencha com o código <br/>da questão:</h1>
+        <input type="number" placeholder="46333832" />
+        <button>Confira!</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      document.querySelector("button").addEventListener("click", () => {
+        const qId = document.querySelector("input").value;
+        axios
+          .post(`https://brainly.com.br/tarefa/${parseFloat(qId)}`, {})
+          .then(function (response) {
+            console.log(response);
+            document.querySelector("body").innerHTML = `${response.data}`;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+    </script>
+  </body>
+</html>
